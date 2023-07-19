@@ -16,7 +16,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc --build --clean && babel src --out-dir dist --extensions '.ts,.tsx'",
+    "build": "tsc --build --clean && babel src --out-dir dist --extensions '.ts,.tsx,.js,.jsx'",
     "dev": "tsc --build --clean && tsc --build --watch",
     "prepack": "tsc --build --clean && tsc --build"
   },
@@ -37,7 +37,9 @@
   "devDependencies": {
     "@babel/cli": "^7.22.9",
     "@babel/core": "^7.22.9",
+    "@babel/plugin-syntax-jsx": "^7.22.5",
     "@babel/preset-env": "^7.22.9",
+    "@babel/preset-react": "^7.22.5",
     "@babel/preset-typescript": "^7.22.5",
     "@testing-library/jest-dom": "^5.0.0",
     "@testing-library/react": "^12.0.0",
