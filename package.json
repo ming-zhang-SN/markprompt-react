@@ -1,0 +1,49 @@
+{
+  "name": "@markprompt/react",
+  "version": "0.16.0",
+  "description": "A headless React component for adding GPT-4 powered search using the Markprompt API.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/motifland/markprompt-js.git",
+    "directory": "packages/react"
+  },
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "exports": "./dist/index.js",
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc --build --clean && tsc --build",
+    "dev": "tsc --build --clean && tsc --build --watch",
+    "prepack": "tsc --build --clean && tsc --build"
+  },
+  "dependencies": {
+    "@markprompt/core": "^0.9.0",
+    "@radix-ui/react-accessible-icon": "^1.0.3",
+    "@radix-ui/react-dialog": "^1.0.4",
+    "@radix-ui/react-visually-hidden": "^1.0.3",
+    "@react-spring/web": "^9.7.2",
+    "clsx": "^1.2.1",
+    "emittery": "^1.0.1",
+    "p-debounce": "^4.0.0",
+    "react-markdown": "^8.0.7",
+    "react-merge-refs": "^2.0.2",
+    "remark-gfm": "^3.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.0.0",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/react-hooks": "^8.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "jsdom": "^22.0.0"
+  },
+  "peerDependencies": {
+    "react": "^16 || ^17 || ^18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
