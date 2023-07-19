@@ -13,6 +13,8 @@ var Caret = function Caret() {
   if (answer) {
     return null;
   }
-  return <span className="MarkpromptCaret" />;
+  return /*#__PURE__*/_react["default"].createElement("span", {
+    className: "MarkpromptCaret"
+  });
 };
 exports.Caret = Caret;

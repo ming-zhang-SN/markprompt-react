@@ -19,20 +19,30 @@ function PromptView(props) {
     references = props.references,
     close = props.close,
     onDidSelectReference = props.onDidSelectReference;
-  return <div className="MarkpromptPromptView">
-      <_MarkpromptForm.MarkpromptForm label={(prompt === null || prompt === void 0 ? void 0 : prompt.label) !== undefined && (prompt === null || prompt === void 0 ? void 0 : prompt.label) != null ? prompt === null || prompt === void 0 ? void 0 : prompt.label : _constants.DEFAULT_MARKPROMPT_OPTIONS.prompt.label} placeholder={(prompt === null || prompt === void 0 ? void 0 : prompt.placeholder) !== undefined && (prompt === null || prompt === void 0 ? void 0 : prompt.placeholder) != null ? prompt === null || prompt === void 0 ? void 0 : prompt.placeholder : _constants.DEFAULT_MARKPROMPT_OPTIONS.prompt.placeholder} icon="prompt" close={close} />
-
-      <AnswerContainer references={references} onDidSelectReference={onDidSelectReference} />
-    </div>;
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "MarkpromptPromptView"
+  }, /*#__PURE__*/_react["default"].createElement(_MarkpromptForm.MarkpromptForm, {
+    label: (prompt === null || prompt === void 0 ? void 0 : prompt.label) !== undefined && (prompt === null || prompt === void 0 ? void 0 : prompt.label) != null ? prompt === null || prompt === void 0 ? void 0 : prompt.label : _constants.DEFAULT_MARKPROMPT_OPTIONS.prompt.label,
+    placeholder: (prompt === null || prompt === void 0 ? void 0 : prompt.placeholder) !== undefined && (prompt === null || prompt === void 0 ? void 0 : prompt.placeholder) != null ? prompt === null || prompt === void 0 ? void 0 : prompt.placeholder : _constants.DEFAULT_MARKPROMPT_OPTIONS.prompt.placeholder,
+    icon: "prompt",
+    close: close
+  }), /*#__PURE__*/_react["default"].createElement(AnswerContainer, {
+    references: references,
+    onDidSelectReference: onDidSelectReference
+  }));
 }
 function AnswerContainer(_ref) {
   var references = _ref.references,
     onDidSelectReference = _ref.onDidSelectReference;
-  return <div className="MarkpromptAnswerContainer">
-      <BaseMarkprompt.AutoScroller className="MarkpromptAutoScroller">
-        <_Answer.Answer />
-      </BaseMarkprompt.AutoScroller>
-
-      <_References.References loadingText={references === null || references === void 0 ? void 0 : references.loadingText} transformReferenceId={references === null || references === void 0 ? void 0 : references.transformReferenceId} getLabel={references === null || references === void 0 ? void 0 : references.getLabel} getHref={references === null || references === void 0 ? void 0 : references.getHref} onDidSelectReference={onDidSelectReference} />
-    </div>;
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "MarkpromptAnswerContainer"
+  }, /*#__PURE__*/_react["default"].createElement(BaseMarkprompt.AutoScroller, {
+    className: "MarkpromptAutoScroller"
+  }, /*#__PURE__*/_react["default"].createElement(_Answer.Answer, null)), /*#__PURE__*/_react["default"].createElement(_References.References, {
+    loadingText: references === null || references === void 0 ? void 0 : references.loadingText,
+    transformReferenceId: references === null || references === void 0 ? void 0 : references.transformReferenceId,
+    getLabel: references === null || references === void 0 ? void 0 : references.getLabel,
+    getHref: references === null || references === void 0 ? void 0 : references.getHref,
+    onDidSelectReference: onDidSelectReference
+  }));
 }

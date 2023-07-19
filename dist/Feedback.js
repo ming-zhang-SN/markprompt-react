@@ -51,22 +51,21 @@ function Feedback(props) {
     }));
     return _handleFeedback.apply(this, arguments);
   }
-  return <aside {...props}>
-      <h3>{heading}</h3>
-
-      {typeof feedback !== 'boolean' && <div>
-          <button aria-label="Yes" onClick={function () {
-        return handleFeedback(true);
-      }}>
-            <_icons.ThumbsUpIcon width={16} height={16} />
-          </button>
-          <button aria-label="No" onClick={function () {
-        return handleFeedback(false);
-      }}>
-            <_icons.ThumbsDownIcon width={16} height={16} />
-          </button>
-        </div>}
-
-      {typeof feedback === 'boolean' && <p>{confirmationMessage}</p>}
-    </aside>;
+  return /*#__PURE__*/_react["default"].createElement("aside", props, /*#__PURE__*/_react["default"].createElement("h3", null, heading), typeof feedback !== 'boolean' && /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("button", {
+    "aria-label": "Yes",
+    onClick: function onClick() {
+      return handleFeedback(true);
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_icons.ThumbsUpIcon, {
+    width: 16,
+    height: 16
+  })), /*#__PURE__*/_react["default"].createElement("button", {
+    "aria-label": "No",
+    onClick: function onClick() {
+      return handleFeedback(false);
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_icons.ThumbsDownIcon, {
+    width: 16,
+    height: 16
+  }))), typeof feedback === 'boolean' && /*#__PURE__*/_react["default"].createElement("p", null, confirmationMessage));
 }

@@ -17,10 +17,11 @@ exports.ConditionalWrap = ConditionalWrap;
 var ConditionalVisuallyHidden = function ConditionalVisuallyHidden(props) {
   var hide = props.hide,
     children = props.children;
-  return <ConditionalWrap condition={hide} wrap={function (children) {
-    return <_reactVisuallyHidden.VisuallyHidden>{children}</_reactVisuallyHidden.VisuallyHidden>;
-  }}>
-      {children}
-    </ConditionalWrap>;
+  return /*#__PURE__*/_react["default"].createElement(ConditionalWrap, {
+    condition: hide,
+    wrap: function wrap(children) {
+      return /*#__PURE__*/_react["default"].createElement(_reactVisuallyHidden.VisuallyHidden, null, children);
+    }
+  }, children);
 };
 exports.ConditionalVisuallyHidden = ConditionalVisuallyHidden;

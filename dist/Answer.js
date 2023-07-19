@@ -14,8 +14,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 function Answer() {
   var _useMarkpromptContext = (0, BaseMarkprompt.useMarkpromptContext)(),
     state = _useMarkpromptContext.state;
-  return <div className="MarkpromptAnswer" aria-describedby="markprompt-progressbar" aria-busy={state === 'preload' || state === 'streaming-answer'} aria-live="polite">
-      <_Caret.Caret />
-      <BaseMarkprompt.Answer />
-    </div>;
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "MarkpromptAnswer",
+    "aria-describedby": "markprompt-progressbar",
+    "aria-busy": state === 'preload' || state === 'streaming-answer',
+    "aria-live": "polite"
+  }, /*#__PURE__*/_react["default"].createElement(_Caret.Caret, null), /*#__PURE__*/_react["default"].createElement(BaseMarkprompt.Answer, null));
 }

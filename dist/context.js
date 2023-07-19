@@ -9,7 +9,7 @@ var _react = require("react");
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 var noop = function noop() {};
 exports.noop = noop;
-var MarkpromptContext = (0, _react.createContext)({
+var MarkpromptContext = /*#__PURE__*/(0, _react.createContext)({
   activeView: 'prompt',
   answer: undefined,
   isSearchEnabled: false,

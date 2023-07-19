@@ -9,7 +9,9 @@ var allIcons = [_icons.ChatIcon, _icons.ChevronLeftIcon, _icons.ChevronUpIcon, _
 (0, _vitest.test)('renders the ThumbsDownIcon component', function () {
   for (var i = 0; i < allIcons.length; i++) {
     var Icon = allIcons[i];
-    var _render = (0, _react.render)(<Icon data-testid={"test-icon-".concat(i)} />),
+    var _render = (0, _react.render)( /*#__PURE__*/_react2["default"].createElement(Icon, {
+        "data-testid": "test-icon-".concat(i)
+      })),
       getByTestId = _render.getByTestId;
     var thumbsDownIcon = getByTestId("test-icon-".concat(i));
     (0, _vitest.expect)(thumbsDownIcon).toBeInTheDocument();

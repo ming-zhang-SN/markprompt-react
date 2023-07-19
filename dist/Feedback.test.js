@@ -38,7 +38,7 @@ var mockContextValue = {
 };
 (0, _vitest.describe)('Feedback', function () {
   (0, _vitest.test)('render the Feedback component', function () {
-    (0, _react.render)(<_Feedback.Feedback />);
+    (0, _react.render)( /*#__PURE__*/_react2["default"].createElement(_Feedback.Feedback, null));
     var element = _react.screen.getByText(/Was this response helpful?/).parentElement;
     (0, _vitest.expect)(element).toBeInTheDocument();
   });
@@ -48,9 +48,9 @@ var mockContextValue = {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
           user = _userEvent["default"].setup();
-          (0, _react.render)(<_context3.MarkpromptContext.Provider value={mockContextValue}>
-        <_Feedback.Feedback />
-      </_context3.MarkpromptContext.Provider>);
+          (0, _react.render)( /*#__PURE__*/_react2["default"].createElement(_context3.MarkpromptContext.Provider, {
+            value: mockContextValue
+          }, /*#__PURE__*/_react2["default"].createElement(_Feedback.Feedback, null)));
           buttons = _react.screen.getAllByRole('button');
           (0, _vitest.expect)(buttons).toHaveLength(2);
           yesButton = _react.screen.getByLabelText('Yes');

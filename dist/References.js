@@ -12,6 +12,7 @@ var Markprompt = _interopRequireWildcard(require("./index.js"));
 var _useElementSize3 = require("./useElementSize.js");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -41,13 +42,16 @@ var Reference = function Reference(props) {
       label: getLabel === null || getLabel === void 0 ? void 0 : getLabel(reference)
     };
   }, [transformReferenceId, getHref, reference, getLabel]);
-  return <li key={referenceHrefLabel.href} className="MarkpromptReference" style={{
-    animationDelay: "".concat(100 * index, "ms")
-  }}>
-      <a href={referenceHrefLabel.href} onClick={onDidSelectReference}>
-        {referenceHrefLabel.label}
-      </a>
-    </li>;
+  return /*#__PURE__*/_react["default"].createElement("li", {
+    key: referenceHrefLabel.href,
+    className: "MarkpromptReference",
+    style: {
+      animationDelay: "".concat(100 * index, "ms")
+    }
+  }, /*#__PURE__*/_react["default"].createElement("a", {
+    href: referenceHrefLabel.href,
+    onClick: onDidSelectReference
+  }, referenceHrefLabel.label));
 };
 var References = function References(props) {
   var getHref = props.getHref,
@@ -65,9 +69,13 @@ var References = function References(props) {
     ref = _useElementSize2[0],
     height = _useElementSize2[1].height;
   var ReferenceComponent = (0, _react.useCallback)(function (props) {
-    return <Reference getHref={getHref} getLabel={getLabel}
-    // Backwards compatibility
-    transformReferenceId={transformReferenceId} {...props} />;
+    return /*#__PURE__*/_react["default"].createElement(Reference, _extends({
+      getHref: getHref,
+      getLabel: getLabel
+      // Backwards compatibility
+      ,
+      transformReferenceId: transformReferenceId
+    }, props));
   }, [transformReferenceId, getHref, getLabel]);
   var adjustedState = state;
   if (state === 'done' && references.length === 0) {
@@ -82,17 +90,22 @@ var References = function References(props) {
     }, [adjustedState, height]),
     _useSpring2 = _slicedToArray(_useSpring, 1),
     style = _useSpring2[0];
-  return <_web.animated.div style={style}>
-      <div ref={ref} className="MarkpromptReferences" data-loading-state={adjustedState} role="status">
-        {state === 'preload' && <>
-            <div className="MarkpromptProgress" id="markprompt-progressbar" role="progressbar" aria-labelledby="markprompt-loading-text" />
-            <p id="markprompt-loading-text">{loadingText}</p>
-          </>}
-
-        {state !== 'preload' && <p>{heading}</p>}
-
-        {(state === 'streaming-answer' || state === 'done') && <Markprompt.References ReferenceComponent={ReferenceComponent} />}
-      </div>
-    </_web.animated.div>;
+  return /*#__PURE__*/_react["default"].createElement(_web.animated.div, {
+    style: style
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    ref: ref,
+    className: "MarkpromptReferences",
+    "data-loading-state": adjustedState,
+    role: "status"
+  }, state === 'preload' && /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "MarkpromptProgress",
+    id: "markprompt-progressbar",
+    role: "progressbar",
+    "aria-labelledby": "markprompt-loading-text"
+  }), /*#__PURE__*/_react["default"].createElement("p", {
+    id: "markprompt-loading-text"
+  }, loadingText)), state !== 'preload' && /*#__PURE__*/_react["default"].createElement("p", null, heading), (state === 'streaming-answer' || state === 'done') && /*#__PURE__*/_react["default"].createElement(Markprompt.References, {
+    ReferenceComponent: ReferenceComponent
+  })));
 };
 exports.References = References;

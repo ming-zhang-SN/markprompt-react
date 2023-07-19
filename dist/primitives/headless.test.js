@@ -16,24 +16,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   return _regeneratorRuntime().wrap(function _callee$(_context) {
     while (1) switch (_context.prev = _context.next) {
       case 0:
-        (0, _react.render)(<Markprompt.Root projectKey="TEST_PROJECT_KEY">
-      <Markprompt.DialogTrigger>Trigger</Markprompt.DialogTrigger>
-      <Markprompt.Portal>
-        <Markprompt.Overlay />
-        <Markprompt.Content>
-          <Markprompt.Close>Close</Markprompt.Close>
-          <Markprompt.Form>
-            Search
-            <Markprompt.Prompt />
-          </Markprompt.Form>
-          <Markprompt.AutoScroller>
-            Caret
-            <Markprompt.Answer />
-          </Markprompt.AutoScroller>
-          <Markprompt.References />
-        </Markprompt.Content>
-      </Markprompt.Portal>
-    </Markprompt.Root>);
+        (0, _react.render)( /*#__PURE__*/_react2["default"].createElement(Markprompt.Root, {
+          projectKey: "TEST_PROJECT_KEY"
+        }, /*#__PURE__*/_react2["default"].createElement(Markprompt.DialogTrigger, null, "Trigger"), /*#__PURE__*/_react2["default"].createElement(Markprompt.Portal, null, /*#__PURE__*/_react2["default"].createElement(Markprompt.Overlay, null), /*#__PURE__*/_react2["default"].createElement(Markprompt.Content, null, /*#__PURE__*/_react2["default"].createElement(Markprompt.Close, null, "Close"), /*#__PURE__*/_react2["default"].createElement(Markprompt.Form, null, "Search", /*#__PURE__*/_react2["default"].createElement(Markprompt.Prompt, null)), /*#__PURE__*/_react2["default"].createElement(Markprompt.AutoScroller, null, "Caret", /*#__PURE__*/_react2["default"].createElement(Markprompt.Answer, null)), /*#__PURE__*/_react2["default"].createElement(Markprompt.References, null)))));
         _context.next = 3;
         return _react.screen.findByText('Trigger');
       case 3:
@@ -51,24 +36,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   return _regeneratorRuntime().wrap(function _callee2$(_context2) {
     while (1) switch (_context2.prev = _context2.next) {
       case 0:
-        (0, _react.render)(<Markprompt.Root projectKey="TEST_PROJECT_KEY">
-      <Markprompt.DialogTrigger>Trigger</Markprompt.DialogTrigger>
-      <Markprompt.Portal>
-        <Markprompt.Overlay />
-        <Markprompt.Content>
-          <Markprompt.Close>Close</Markprompt.Close>
-          <Markprompt.Form>
-            Search
-            <Markprompt.Prompt />
-          </Markprompt.Form>
-          <Markprompt.AutoScroller>
-            Caret
-            <Markprompt.Answer />
-          </Markprompt.AutoScroller>
-          <Markprompt.References />
-        </Markprompt.Content>
-      </Markprompt.Portal>
-    </Markprompt.Root>);
+        (0, _react.render)( /*#__PURE__*/_react2["default"].createElement(Markprompt.Root, {
+          projectKey: "TEST_PROJECT_KEY"
+        }, /*#__PURE__*/_react2["default"].createElement(Markprompt.DialogTrigger, null, "Trigger"), /*#__PURE__*/_react2["default"].createElement(Markprompt.Portal, null, /*#__PURE__*/_react2["default"].createElement(Markprompt.Overlay, null), /*#__PURE__*/_react2["default"].createElement(Markprompt.Content, null, /*#__PURE__*/_react2["default"].createElement(Markprompt.Close, null, "Close"), /*#__PURE__*/_react2["default"].createElement(Markprompt.Form, null, "Search", /*#__PURE__*/_react2["default"].createElement(Markprompt.Prompt, null)), /*#__PURE__*/_react2["default"].createElement(Markprompt.AutoScroller, null, "Caret", /*#__PURE__*/_react2["default"].createElement(Markprompt.Answer, null)), /*#__PURE__*/_react2["default"].createElement(Markprompt.References, null)))));
         _context2.next = 3;
         return _react.screen.findByText('Trigger');
       case 3:
@@ -94,12 +64,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   return _regeneratorRuntime().wrap(function _callee3$(_context3) {
     while (1) switch (_context3.prev = _context3.next) {
       case 0:
-        (0, _react.render)(<Markprompt.Root projectKey="TEST_PROJECT_KEY">
-      <Markprompt.DialogTrigger>Trigger</Markprompt.DialogTrigger>
-      <Markprompt.Portal>
-        <Markprompt.Content showBranding></Markprompt.Content>
-      </Markprompt.Portal>
-    </Markprompt.Root>);
+        (0, _react.render)( /*#__PURE__*/_react2["default"].createElement(Markprompt.Root, {
+          projectKey: "TEST_PROJECT_KEY"
+        }, /*#__PURE__*/_react2["default"].createElement(Markprompt.DialogTrigger, null, "Trigger"), /*#__PURE__*/_react2["default"].createElement(Markprompt.Portal, null, /*#__PURE__*/_react2["default"].createElement(Markprompt.Content, {
+          showBranding: true
+        }))));
         _context3.next = 3;
         return _react.screen.findByText('Trigger');
       case 3:
@@ -123,12 +92,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   return _regeneratorRuntime().wrap(function _callee4$(_context4) {
     while (1) switch (_context4.prev = _context4.next) {
       case 0:
-        (0, _react.render)(<Markprompt.Root projectKey="TEST_PROJECT_KEY">
-      <Markprompt.DialogTrigger>Trigger</Markprompt.DialogTrigger>
-      <Markprompt.Portal>
-        <Markprompt.Content showBranding={false}></Markprompt.Content>
-      </Markprompt.Portal>
-    </Markprompt.Root>);
+        (0, _react.render)( /*#__PURE__*/_react2["default"].createElement(Markprompt.Root, {
+          projectKey: "TEST_PROJECT_KEY"
+        }, /*#__PURE__*/_react2["default"].createElement(Markprompt.DialogTrigger, null, "Trigger"), /*#__PURE__*/_react2["default"].createElement(Markprompt.Portal, null, /*#__PURE__*/_react2["default"].createElement(Markprompt.Content, {
+          showBranding: false
+        }))));
         _context4.next = 3;
         return _react.screen.findByText('Trigger');
       case 3:
@@ -152,12 +120,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   return _regeneratorRuntime().wrap(function _callee5$(_context5) {
     while (1) switch (_context5.prev = _context5.next) {
       case 0:
-        (0, _react.render)(<Markprompt.Root projectKey="TEST_PROJECT_KEY">
-      <Markprompt.DialogTrigger>Trigger</Markprompt.DialogTrigger>
-      <Markprompt.Portal>
-        <Markprompt.PlainContent showBranding></Markprompt.PlainContent>
-      </Markprompt.Portal>
-    </Markprompt.Root>);
+        (0, _react.render)( /*#__PURE__*/_react2["default"].createElement(Markprompt.Root, {
+          projectKey: "TEST_PROJECT_KEY"
+        }, /*#__PURE__*/_react2["default"].createElement(Markprompt.DialogTrigger, null, "Trigger"), /*#__PURE__*/_react2["default"].createElement(Markprompt.Portal, null, /*#__PURE__*/_react2["default"].createElement(Markprompt.PlainContent, {
+          showBranding: true
+        }))));
         _context5.next = 3;
         return _react.screen.findByText('Trigger');
       case 3:
@@ -181,12 +148,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   return _regeneratorRuntime().wrap(function _callee6$(_context6) {
     while (1) switch (_context6.prev = _context6.next) {
       case 0:
-        (0, _react.render)(<Markprompt.Root projectKey="TEST_PROJECT_KEY">
-      <Markprompt.DialogTrigger>Trigger</Markprompt.DialogTrigger>
-      <Markprompt.Portal>
-        <Markprompt.PlainContent showBranding={false}></Markprompt.PlainContent>
-      </Markprompt.Portal>
-    </Markprompt.Root>);
+        (0, _react.render)( /*#__PURE__*/_react2["default"].createElement(Markprompt.Root, {
+          projectKey: "TEST_PROJECT_KEY"
+        }, /*#__PURE__*/_react2["default"].createElement(Markprompt.DialogTrigger, null, "Trigger"), /*#__PURE__*/_react2["default"].createElement(Markprompt.Portal, null, /*#__PURE__*/_react2["default"].createElement(Markprompt.PlainContent, {
+          showBranding: false
+        }))));
         _context6.next = 3;
         return _react.screen.findByText('Trigger');
       case 3:
@@ -215,7 +181,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         originalError = console.error; // eslint-disable-next-line no-console
         console.error = _vitest.vi.fn();
         try {
-          (0, _react.render)(<Markprompt.Root projectKey={undefined}></Markprompt.Root>);
+          (0, _react.render)( /*#__PURE__*/_react2["default"].createElement(Markprompt.Root, {
+            projectKey: undefined
+          }));
         } catch (error) {
           (0, _vitest.expect)(error.message).toContain('a project key is required');
         }
@@ -232,24 +200,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   return _regeneratorRuntime().wrap(function _callee8$(_context8) {
     while (1) switch (_context8.prev = _context8.next) {
       case 0:
-        (0, _react.render)(<Markprompt.Root projectKey="TEST_PROJECT_KEY" searchOptions={{
-          enabled: true
-        }}>
-      <Markprompt.DialogTrigger>Trigger</Markprompt.DialogTrigger>
-      <Markprompt.Portal>
-        <Markprompt.Overlay />
-        <Markprompt.Content>
-          <Markprompt.Close>Close</Markprompt.Close>
-          {/* <Markprompt.Form>
-            Search
-            <Markprompt.Prompt />
-           </Markprompt.Form>
-           <Markprompt.SearchResults>
-           </Markprompt.SearchResults>
-           <Markprompt.References /> */}
-        </Markprompt.Content>
-      </Markprompt.Portal>
-    </Markprompt.Root>);
+        (0, _react.render)( /*#__PURE__*/_react2["default"].createElement(Markprompt.Root, {
+          projectKey: "TEST_PROJECT_KEY",
+          searchOptions: {
+            enabled: true
+          }
+        }, /*#__PURE__*/_react2["default"].createElement(Markprompt.DialogTrigger, null, "Trigger"), /*#__PURE__*/_react2["default"].createElement(Markprompt.Portal, null, /*#__PURE__*/_react2["default"].createElement(Markprompt.Overlay, null), /*#__PURE__*/_react2["default"].createElement(Markprompt.Content, null, /*#__PURE__*/_react2["default"].createElement(Markprompt.Close, null, "Close")))));
         _context8.next = 3;
         return _react.screen.findByText('Trigger');
       case 3:

@@ -34,18 +34,22 @@ function SearchBoxTrigger(props) {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [open, setOpen]);
-  return <BaseMarkprompt.DialogTrigger className="MarkpromptSearchBoxTrigger">
-      <AccessibleIcon.Root label={(trigger === null || trigger === void 0 ? void 0 : trigger.label) !== undefined && (trigger === null || trigger === void 0 ? void 0 : trigger.label) != null ? trigger === null || trigger === void 0 ? void 0 : trigger.label : _constants.DEFAULT_MARKPROMPT_OPTIONS.trigger.label}>
-        <span className="MarkpromptSearchBoxTriggerContent">
-          <span className="MarkpromptSearchBoxTriggerText">
-            <_icons.SearchIcon width={16} height={16} />{" "}
-            {(trigger === null || trigger === void 0 ? void 0 : trigger.placeholder) || "Search"}{" "}
-          </span>
-          <kbd>
-            {navigator.platform.indexOf("Mac") === 0 || navigator.platform === "iPhone" ? <_icons.CommandIcon className="MarkpromptKeyboardKey" /> : <_icons.ChevronUpIcon className="MarkpromptKeyboardKey" />}
-            <_icons.CornerDownLeftIcon className="MarkpromptKeyboardKey" />
-          </kbd>
-        </span>
-      </AccessibleIcon.Root>
-    </BaseMarkprompt.DialogTrigger>;
+  return /*#__PURE__*/_react["default"].createElement(BaseMarkprompt.DialogTrigger, {
+    className: "MarkpromptSearchBoxTrigger"
+  }, /*#__PURE__*/_react["default"].createElement(AccessibleIcon.Root, {
+    label: (trigger === null || trigger === void 0 ? void 0 : trigger.label) !== undefined && (trigger === null || trigger === void 0 ? void 0 : trigger.label) != null ? trigger === null || trigger === void 0 ? void 0 : trigger.label : _constants.DEFAULT_MARKPROMPT_OPTIONS.trigger.label
+  }, /*#__PURE__*/_react["default"].createElement("span", {
+    className: "MarkpromptSearchBoxTriggerContent"
+  }, /*#__PURE__*/_react["default"].createElement("span", {
+    className: "MarkpromptSearchBoxTriggerText"
+  }, /*#__PURE__*/_react["default"].createElement(_icons.SearchIcon, {
+    width: 16,
+    height: 16
+  }), " ", (trigger === null || trigger === void 0 ? void 0 : trigger.placeholder) || "Search", " "), /*#__PURE__*/_react["default"].createElement("kbd", null, navigator.platform.indexOf("Mac") === 0 || navigator.platform === "iPhone" ? /*#__PURE__*/_react["default"].createElement(_icons.CommandIcon, {
+    className: "MarkpromptKeyboardKey"
+  }) : /*#__PURE__*/_react["default"].createElement(_icons.ChevronUpIcon, {
+    className: "MarkpromptKeyboardKey"
+  }), /*#__PURE__*/_react["default"].createElement(_icons.CornerDownLeftIcon, {
+    className: "MarkpromptKeyboardKey"
+  })))));
 }

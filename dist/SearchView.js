@@ -14,6 +14,7 @@ var _SearchResult = require("./SearchResult.js");
 var _excluded = ["index"];
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -98,17 +99,27 @@ function SearchView(props) {
         }
     }
   }, [activeSearchResult, searchResults.length]);
-  return <div className="MarkpromptSearchView">
-      <_MarkpromptForm.MarkpromptForm label={(search === null || search === void 0 ? void 0 : search.label) !== undefined && (search === null || search === void 0 ? void 0 : search.label) != null ? search === null || search === void 0 ? void 0 : search.label : _constants.DEFAULT_MARKPROMPT_OPTIONS.search.label} placeholder={(search === null || search === void 0 ? void 0 : search.placeholder) !== undefined && (search === null || search === void 0 ? void 0 : search.placeholder) != null ? search === null || search === void 0 ? void 0 : search.placeholder : _constants.DEFAULT_MARKPROMPT_OPTIONS.search.placeholder} inputProps={(0, _react.useMemo)(function () {
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "MarkpromptSearchView"
+  }, /*#__PURE__*/_react["default"].createElement(_MarkpromptForm.MarkpromptForm, {
+    label: (search === null || search === void 0 ? void 0 : search.label) !== undefined && (search === null || search === void 0 ? void 0 : search.label) != null ? search === null || search === void 0 ? void 0 : search.label : _constants.DEFAULT_MARKPROMPT_OPTIONS.search.label,
+    placeholder: (search === null || search === void 0 ? void 0 : search.placeholder) !== undefined && (search === null || search === void 0 ? void 0 : search.placeholder) != null ? search === null || search === void 0 ? void 0 : search.placeholder : _constants.DEFAULT_MARKPROMPT_OPTIONS.search.placeholder,
+    inputProps: (0, _react.useMemo)(function () {
       return {
         onKeyDown: handleKeyDown,
         "aria-controls": "markprompt-search-results",
         "aria-activedescendant": activeSearchResult === null || activeSearchResult === void 0 ? void 0 : activeSearchResult.id
       };
-    }, [activeSearchResult, handleKeyDown])} icon="search" close={close} />
-
-      <SearchResultsContainer activeSearchResult={activeSearchResult} search={search} handleViewChange={handleViewChange} onDidSelectResult={onDidSelectResult} setActiveSearchResult={setActiveSearchResult} />
-    </div>;
+    }, [activeSearchResult, handleKeyDown]),
+    icon: "search",
+    close: close
+  }), /*#__PURE__*/_react["default"].createElement(SearchResultsContainer, {
+    activeSearchResult: activeSearchResult,
+    search: search,
+    handleViewChange: handleViewChange,
+    onDidSelectResult: onDidSelectResult,
+    setActiveSearchResult: setActiveSearchResult
+  }));
 }
 function SearchResultsContainer(props) {
   var activeSearchResult = props.activeSearchResult,
@@ -155,32 +166,36 @@ function SearchResultsContainer(props) {
       block: "nearest"
     });
   }, [activeSearchResult, searchResults]);
-  return <div className="MarkpromptSearchResultsContainer">
-      {state === "done" && searchResults.length === 0 && searchQuery.trim().length > 0 && <div className="MarkpromptNoSearchResults">
-            <p>
-              No results for “<span>{searchQuery}</span>”
-            </p>
-          </div>}
-
-      {searchResults.length > 0 && <BaseMarkprompt.SearchResults className="MarkpromptSearchResults" SearchResultComponent={function (_ref) {
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "MarkpromptSearchResultsContainer"
+  }, state === "done" && searchResults.length === 0 && searchQuery.trim().length > 0 && /*#__PURE__*/_react["default"].createElement("div", {
+    className: "MarkpromptNoSearchResults"
+  }, /*#__PURE__*/_react["default"].createElement("p", null, "No results for \u201C", /*#__PURE__*/_react["default"].createElement("span", null, searchQuery), "\u201D")), searchResults.length > 0 && /*#__PURE__*/_react["default"].createElement(BaseMarkprompt.SearchResults, {
+    className: "MarkpromptSearchResults",
+    SearchResultComponent: function SearchResultComponent(_ref) {
       var index = _ref.index,
         rest = _objectWithoutProperties(_ref, _excluded);
       var id = "markprompt-result-".concat(index);
-      return <_SearchResult.SearchResult {...rest} id={id} onMouseMove={function () {
-        // We use a mouse move event, instead of mouse over or
-        // mouse enter. Indeed, onMouseOver and onMouseEnter will
-        // trigger at each rerender. This is a problem when scrolling
-        // the list using the keyboard: it will automatically reselect
-        // the result that the mouse is over.
-        if ((onMouseMovedOverSearchResult === null || onMouseMovedOverSearchResult === void 0 ? void 0 : onMouseMovedOverSearchResult.current) === id) {
-          return;
-        }
-        onMouseMovedOverSearchResult.current = id;
-        setActiveSearchResult({
-          id: id,
-          trigger: "mouse"
-        });
-      }} onClick={onDidSelectResult} aria-selected={id === (activeSearchResult === null || activeSearchResult === void 0 ? void 0 : activeSearchResult.id)} />;
-    }} />}
-    </div>;
+      return /*#__PURE__*/_react["default"].createElement(_SearchResult.SearchResult, _extends({}, rest, {
+        id: id,
+        onMouseMove: function onMouseMove() {
+          // We use a mouse move event, instead of mouse over or
+          // mouse enter. Indeed, onMouseOver and onMouseEnter will
+          // trigger at each rerender. This is a problem when scrolling
+          // the list using the keyboard: it will automatically reselect
+          // the result that the mouse is over.
+          if ((onMouseMovedOverSearchResult === null || onMouseMovedOverSearchResult === void 0 ? void 0 : onMouseMovedOverSearchResult.current) === id) {
+            return;
+          }
+          onMouseMovedOverSearchResult.current = id;
+          setActiveSearchResult({
+            id: id,
+            trigger: "mouse"
+          });
+        },
+        onClick: onDidSelectResult,
+        "aria-selected": id === (activeSearchResult === null || activeSearchResult === void 0 ? void 0 : activeSearchResult.id)
+      }));
+    }
+  }));
 }
