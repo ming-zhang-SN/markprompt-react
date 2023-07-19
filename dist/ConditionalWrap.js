@@ -1,11 +1,26 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import React, {} from 'react';
-export const ConditionalWrap = (props) => {
-    const { condition, wrap, children } = props;
-    return (condition ? wrap(children) : children);
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ConditionalWrap = exports.ConditionalVisuallyHidden = void 0;
+var _reactVisuallyHidden = require("@radix-ui/react-visually-hidden");
+var _react = _interopRequireDefault(require("react"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var ConditionalWrap = function ConditionalWrap(props) {
+  var condition = props.condition,
+    wrap = props.wrap,
+    children = props.children;
+  return condition ? wrap(children) : children;
 };
-export const ConditionalVisuallyHidden = (props) => {
-    const { hide, children } = props;
-    return (React.createElement(ConditionalWrap, { condition: hide, wrap: (children) => React.createElement(VisuallyHidden, null, children) }, children));
+exports.ConditionalWrap = ConditionalWrap;
+var ConditionalVisuallyHidden = function ConditionalVisuallyHidden(props) {
+  var hide = props.hide,
+    children = props.children;
+  return <ConditionalWrap condition={hide} wrap={function (children) {
+    return <_reactVisuallyHidden.VisuallyHidden>{children}</_reactVisuallyHidden.VisuallyHidden>;
+  }}>
+      {children}
+    </ConditionalWrap>;
 };
-//# sourceMappingURL=ConditionalWrap.js.map
+exports.ConditionalVisuallyHidden = ConditionalVisuallyHidden;

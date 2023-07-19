@@ -1,235 +1,370 @@
-import * as Dialog from "@radix-ui/react-dialog";
-import debounce from "p-debounce";
-import React, { forwardRef, useCallback, useEffect, useMemo, useRef, } from "react";
-import Markdown from "react-markdown";
-import { mergeRefs } from "react-merge-refs";
-import remarkGfm from "remark-gfm";
-import { Footer } from "./footer.js";
-import { ConditionalVisuallyHidden } from "../ConditionalWrap.js";
-import { DEFAULT_MARKPROMPT_OPTIONS } from "../constants.js";
-import { MarkpromptContext, useMarkpromptContext } from "../context.js";
-import { useMarkprompt } from "../useMarkprompt.js";
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Answer = Answer;
+exports.PlainContent = exports.Overlay = exports.Form = exports.DialogTrigger = exports.Description = exports.Content = exports.Close = exports.AutoScroller = void 0;
+exports.Portal = Portal;
+exports.References = exports.Prompt = void 0;
+exports.Root = Root;
+exports.Title = exports.SearchResults = exports.SearchResult = void 0;
+var Dialog = _interopRequireWildcard(require("@radix-ui/react-dialog"));
+var _pDebounce = _interopRequireDefault(require("p-debounce"));
+var _react = _interopRequireWildcard(require("react"));
+var _reactMarkdown = _interopRequireDefault(require("react-markdown"));
+var _reactMergeRefs = require("react-merge-refs");
+var _remarkGfm = _interopRequireDefault(require("remark-gfm"));
+var _footer = require("./footer.js");
+var _ConditionalWrap = require("../ConditionalWrap.js");
+var _constants = require("../constants.js");
+var _context2 = require("../context.js");
+var _useMarkprompt = require("../useMarkprompt.js");
+var _excluded = ["children", "display", "defaultOpen", "modal", "onOpenChange", "open"],
+  _excluded2 = ["onOpenChange", "modal"],
+  _excluded3 = ["showBranding"],
+  _excluded4 = ["showBranding"],
+  _excluded5 = ["onClick"],
+  _excluded6 = ["onSubmit"],
+  _excluded7 = ["autoCapitalize", "autoComplete", "autoCorrect", "autoFocus", "label", "labelClassName", "onChange", "placeholder", "spellCheck", "type"],
+  _excluded8 = ["remarkPlugins"],
+  _excluded9 = ["as", "label", "SearchResultComponent"],
+  _excluded10 = ["title", "href"];
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 /**
  * The Markprompt context provider and dialog root.
  */
 function Root(props) {
-    const { children, display = "dialog", defaultOpen, modal, onOpenChange, open, ...markpromptOptions } = props;
-    if (!markpromptOptions.projectKey) {
-        throw new Error("Markprompt: a project key is required. Make sure to pass the projectKey prop to Markprompt.Root.");
-    }
-    const contextValue = useMarkprompt(markpromptOptions);
-    return (React.createElement(MarkpromptContext.Provider, { value: contextValue },
-        display === "dialog" && (React.createElement(DialogRootWithAbort, { defaultOpen: defaultOpen, modal: modal, onOpenChange: onOpenChange, open: open }, children)),
-        display === "plain" && children));
+  var children = props.children,
+    _props$display = props.display,
+    display = _props$display === void 0 ? "dialog" : _props$display,
+    defaultOpen = props.defaultOpen,
+    modal = props.modal,
+    onOpenChange = props.onOpenChange,
+    open = props.open,
+    markpromptOptions = _objectWithoutProperties(props, _excluded);
+  if (!markpromptOptions.projectKey) {
+    throw new Error("Markprompt: a project key is required. Make sure to pass the projectKey prop to Markprompt.Root.");
+  }
+  var contextValue = (0, _useMarkprompt.useMarkprompt)(markpromptOptions);
+  return <_context2.MarkpromptContext.Provider value={contextValue}>
+      {display === "dialog" && <DialogRootWithAbort defaultOpen={defaultOpen} modal={modal} onOpenChange={onOpenChange} open={open}>
+          {children}
+        </DialogRootWithAbort>}
+      {display === "plain" && children}
+    </_context2.MarkpromptContext.Provider>;
 }
 function DialogRootWithAbort(props) {
-    const { onOpenChange, modal = true, ...rest } = props;
-    const { abort } = useMarkpromptContext();
-    const handleOpenChange = useCallback((open) => {
-        if (!open)
-            abort();
-        if (onOpenChange)
-            onOpenChange(open);
-    }, [abort, onOpenChange]);
-    return (React.createElement(Dialog.Root, { ...rest, modal: modal, onOpenChange: handleOpenChange }, props.children));
+  var onOpenChange = props.onOpenChange,
+    _props$modal = props.modal,
+    modal = _props$modal === void 0 ? true : _props$modal,
+    rest = _objectWithoutProperties(props, _excluded2);
+  var _useMarkpromptContext = (0, _context2.useMarkpromptContext)(),
+    abort = _useMarkpromptContext.abort;
+  var handleOpenChange = (0, _react.useCallback)(function (open) {
+    if (!open) abort();
+    if (onOpenChange) onOpenChange(open);
+  }, [abort, onOpenChange]);
+  return <Dialog.Root {...rest} modal={modal} onOpenChange={handleOpenChange}>
+      {props.children}
+    </Dialog.Root>;
 }
 /**
  * A button to open the Markprompt dialog.
  */
-const DialogTrigger = forwardRef((props, ref) => {
-    return React.createElement(Dialog.Trigger, { ref: ref, ...props });
+var DialogTrigger = (0, _react.forwardRef)(function (props, ref) {
+  return <Dialog.Trigger ref={ref} {...props} />;
 });
+exports.DialogTrigger = DialogTrigger;
 DialogTrigger.displayName = "Markprompt.DialogTrigger";
 /**
  * The Markprompt dialog portal.
  */
 function Portal(props) {
-    return React.createElement(Dialog.Portal, { ...props });
+  return <Dialog.Portal {...props} />;
 }
 Portal.displayName = "Markprompt.Portal";
 /**
  * The Markprompt dialog overlay.
  */
-const Overlay = forwardRef((props, ref) => {
-    return React.createElement(Dialog.Overlay, { ref: ref, ...props });
+var Overlay = (0, _react.forwardRef)(function (props, ref) {
+  return <Dialog.Overlay ref={ref} {...props} />;
 });
+exports.Overlay = Overlay;
 Overlay.displayName = "Markprompt.Overlay";
 /**
  * The Markprompt dialog content.
  */
-const Content = forwardRef(function Content(props, ref) {
-    const { showBranding = true, ...rest } = props;
-    const { state, searchProvider } = useMarkpromptContext();
-    return (React.createElement(Dialog.Content, { ...rest, ref: ref, "data-loading-state": state },
-        props.children,
-        showBranding && React.createElement(Footer, { includeAlgolia: searchProvider === "algolia" })));
+var Content = (0, _react.forwardRef)(function Content(props, ref) {
+  var _props$showBranding = props.showBranding,
+    showBranding = _props$showBranding === void 0 ? true : _props$showBranding,
+    rest = _objectWithoutProperties(props, _excluded3);
+  var _useMarkpromptContext2 = (0, _context2.useMarkpromptContext)(),
+    state = _useMarkpromptContext2.state,
+    searchProvider = _useMarkpromptContext2.searchProvider;
+  return <Dialog.Content {...rest} ref={ref} data-loading-state={state}>
+      {props.children}
+      {showBranding && <_footer.Footer includeAlgolia={searchProvider === "algolia"} />}
+    </Dialog.Content>;
 });
+exports.Content = Content;
 Content.displayName = "Markprompt.Content";
 /**
  * The Markprompt plain content.
  */
-const PlainContent = forwardRef(function PlainContent(props, ref) {
-    const { showBranding = true, ...rest } = props;
-    const { state, searchProvider } = useMarkpromptContext();
-    return (React.createElement("div", { ...rest, ref: ref, "data-loading-state": state },
-        props.children,
-        showBranding && (React.createElement(Footer, { includeAlgolia: searchProvider === "algolia" }))));
+var PlainContent = (0, _react.forwardRef)(function PlainContent(props, ref) {
+  var _props$showBranding2 = props.showBranding,
+    showBranding = _props$showBranding2 === void 0 ? true : _props$showBranding2,
+    rest = _objectWithoutProperties(props, _excluded4);
+  var _useMarkpromptContext3 = (0, _context2.useMarkpromptContext)(),
+    state = _useMarkpromptContext3.state,
+    searchProvider = _useMarkpromptContext3.searchProvider;
+  return <div {...rest} ref={ref} data-loading-state={state}>
+        {props.children}
+        {showBranding && <_footer.Footer includeAlgolia={searchProvider === "algolia"} />}
+      </div>;
 });
+exports.PlainContent = PlainContent;
 PlainContent.displayName = "Markprompt.PlainContent";
 /**
  * A button to close the Markprompt dialog and abort an ongoing request.
  */
-const Close = forwardRef(function Close(props, ref) {
-    const { onClick, ...rest } = props;
-    const { abort } = useMarkpromptContext();
-    const handleClick = useCallback((event) => {
-        // abort ongoing fetch requests on close
-        abort();
-        // call user-provided onClick handler
-        if (onClick)
-            onClick(event);
-    }, [abort, onClick]);
-    return React.createElement(Dialog.Close, { ...rest, ref: ref, onClick: handleClick });
+var Close = (0, _react.forwardRef)(function Close(props, ref) {
+  var onClick = props.onClick,
+    rest = _objectWithoutProperties(props, _excluded5);
+  var _useMarkpromptContext4 = (0, _context2.useMarkpromptContext)(),
+    abort = _useMarkpromptContext4.abort;
+  var handleClick = (0, _react.useCallback)(function (event) {
+    // abort ongoing fetch requests on close
+    abort();
+    // call user-provided onClick handler
+    if (onClick) onClick(event);
+  }, [abort, onClick]);
+  return <Dialog.Close {...rest} ref={ref} onClick={handleClick} />;
 });
+exports.Close = Close;
 Close.displayName = "Markprompt.Close";
-const Title = forwardRef((props, ref) => {
-    const { hide } = props;
-    return (React.createElement(ConditionalVisuallyHidden, { hide: hide },
-        React.createElement(Dialog.Title, { ...props, ref: ref })));
+var Title = (0, _react.forwardRef)(function (props, ref) {
+  var hide = props.hide;
+  return <_ConditionalWrap.ConditionalVisuallyHidden hide={hide}>
+      <Dialog.Title {...props} ref={ref} />
+    </_ConditionalWrap.ConditionalVisuallyHidden>;
 });
+exports.Title = Title;
 Title.displayName = "Markprompt.Title";
 /**
  * A visually hidden aria description.
  */
-const Description = forwardRef((props, ref) => {
-    const { hide } = props;
-    return (React.createElement(ConditionalVisuallyHidden, { hide: hide },
-        React.createElement(Dialog.Description, { ...props, ref: ref })));
+var Description = (0, _react.forwardRef)(function (props, ref) {
+  var hide = props.hide;
+  return <_ConditionalWrap.ConditionalVisuallyHidden hide={hide}>
+        <Dialog.Description {...props} ref={ref} />
+      </_ConditionalWrap.ConditionalVisuallyHidden>;
 });
+exports.Description = Description;
 Description.displayName = "Markprompt.Description";
 /**
  * A form which, when submitted, submits the current prompt.
  */
-const Form = forwardRef(function Form(props, ref) {
-    const { onSubmit, ...rest } = props;
-    const { activeView, isSearchEnabled, submitPrompt, submitSearchQuery, prompt, } = useMarkpromptContext();
-    const handleSubmit = useCallback(async (event) => {
-        event.preventDefault();
-        // call user-provided onSubmit handler
-        if (onSubmit) {
-            onSubmit(event);
+var Form = (0, _react.forwardRef)(function Form(props, ref) {
+  var onSubmit = props.onSubmit,
+    rest = _objectWithoutProperties(props, _excluded6);
+  var _useMarkpromptContext5 = (0, _context2.useMarkpromptContext)(),
+    activeView = _useMarkpromptContext5.activeView,
+    isSearchEnabled = _useMarkpromptContext5.isSearchEnabled,
+    submitPrompt = _useMarkpromptContext5.submitPrompt,
+    submitSearchQuery = _useMarkpromptContext5.submitSearchQuery,
+    prompt = _useMarkpromptContext5.prompt;
+  var handleSubmit = (0, _react.useCallback)( /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(event) {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            event.preventDefault();
+
+            // call user-provided onSubmit handler
+            if (onSubmit) {
+              onSubmit(event);
+            }
+
+            // submit search query if search is enabled
+            if (!(isSearchEnabled && activeView === "search")) {
+              _context.next = 7;
+              break;
+            }
+            _context.next = 5;
+            return submitSearchQuery(prompt);
+          case 5:
+            _context.next = 9;
+            break;
+          case 7:
+            _context.next = 9;
+            return submitPrompt();
+          case 9:
+          case "end":
+            return _context.stop();
         }
-        // submit search query if search is enabled
-        if (isSearchEnabled && activeView === "search") {
-            await submitSearchQuery(prompt);
-        }
-        else {
-            // submit prompt if search is disabled
-            await submitPrompt();
-        }
-    }, [
-        activeView,
-        isSearchEnabled,
-        onSubmit,
-        prompt,
-        submitPrompt,
-        submitSearchQuery,
-    ]);
-    return React.createElement("form", { ...rest, ref: ref, onSubmit: handleSubmit });
+      }, _callee);
+    }));
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }(), [activeView, isSearchEnabled, onSubmit, prompt, submitPrompt, submitSearchQuery]);
+  return <form {...rest} ref={ref} onSubmit={handleSubmit} />;
 });
+exports.Form = Form;
 Form.displayName = "Markprompt.Form";
-const name = "markprompt-prompt";
+var name = "markprompt-prompt";
 /**
  * The Markprompt input prompt. User input will update the prompt in the Markprompt context.
  */
-const Prompt = forwardRef(function Prompt(props, ref) {
-    const { autoCapitalize = "none", autoComplete = "off", autoCorrect = "off", autoFocus = true, label, labelClassName, onChange, placeholder = DEFAULT_MARKPROMPT_OPTIONS.prompt.placeholder, spellCheck = false, type = "search", ...rest } = props;
-    const { activeView, prompt, searchQuery, submitSearchQuery, setPrompt, setSearchQuery, } = useMarkpromptContext();
-    const debouncedSubmitSearchQuery = useMemo(() => debounce(submitSearchQuery, 220), [submitSearchQuery]);
-    const handleChange = useCallback((event) => {
-        const value = event.target.value;
-        // We use the input value directly instead of using the prompt state
-        // to avoid an off-by-one-bug when querying.
-        if (activeView === "search") {
-            setSearchQuery(value);
-            debouncedSubmitSearchQuery(value);
-        }
-        if (activeView === "prompt") {
-            setPrompt(value);
-        }
-        if (onChange) {
-            onChange(event);
-        }
-    }, [
-        activeView,
-        onChange,
-        setSearchQuery,
-        debouncedSubmitSearchQuery,
-        setPrompt,
-    ]);
-    return (React.createElement(React.Fragment, null,
-        React.createElement("label", { htmlFor: name, className: labelClassName }, label),
-        React.createElement("input", { ...rest, id: name, type: type, name: name, placeholder: placeholder, ref: ref, value: activeView === "search" ? searchQuery : prompt, onChange: handleChange, autoCapitalize: autoCapitalize, autoComplete: autoComplete, autoCorrect: autoCorrect, autoFocus: autoFocus, spellCheck: spellCheck })));
+var Prompt = (0, _react.forwardRef)(function Prompt(props, ref) {
+  var _props$autoCapitalize = props.autoCapitalize,
+    autoCapitalize = _props$autoCapitalize === void 0 ? "none" : _props$autoCapitalize,
+    _props$autoComplete = props.autoComplete,
+    autoComplete = _props$autoComplete === void 0 ? "off" : _props$autoComplete,
+    _props$autoCorrect = props.autoCorrect,
+    autoCorrect = _props$autoCorrect === void 0 ? "off" : _props$autoCorrect,
+    _props$autoFocus = props.autoFocus,
+    autoFocus = _props$autoFocus === void 0 ? true : _props$autoFocus,
+    label = props.label,
+    labelClassName = props.labelClassName,
+    onChange = props.onChange,
+    _props$placeholder = props.placeholder,
+    placeholder = _props$placeholder === void 0 ? _constants.DEFAULT_MARKPROMPT_OPTIONS.prompt.placeholder : _props$placeholder,
+    _props$spellCheck = props.spellCheck,
+    spellCheck = _props$spellCheck === void 0 ? false : _props$spellCheck,
+    _props$type = props.type,
+    type = _props$type === void 0 ? "search" : _props$type,
+    rest = _objectWithoutProperties(props, _excluded7);
+  var _useMarkpromptContext6 = (0, _context2.useMarkpromptContext)(),
+    activeView = _useMarkpromptContext6.activeView,
+    prompt = _useMarkpromptContext6.prompt,
+    searchQuery = _useMarkpromptContext6.searchQuery,
+    submitSearchQuery = _useMarkpromptContext6.submitSearchQuery,
+    setPrompt = _useMarkpromptContext6.setPrompt,
+    setSearchQuery = _useMarkpromptContext6.setSearchQuery;
+  var debouncedSubmitSearchQuery = (0, _react.useMemo)(function () {
+    return (0, _pDebounce["default"])(submitSearchQuery, 220);
+  }, [submitSearchQuery]);
+  var handleChange = (0, _react.useCallback)(function (event) {
+    var value = event.target.value;
+    // We use the input value directly instead of using the prompt state
+    // to avoid an off-by-one-bug when querying.
+    if (activeView === "search") {
+      setSearchQuery(value);
+      debouncedSubmitSearchQuery(value);
+    }
+    if (activeView === "prompt") {
+      setPrompt(value);
+    }
+    if (onChange) {
+      onChange(event);
+    }
+  }, [activeView, onChange, setSearchQuery, debouncedSubmitSearchQuery, setPrompt]);
+  return <>
+      <label htmlFor={name} className={labelClassName}>
+        {label}
+      </label>
+      <input {...rest} id={name} type={type} name={name} placeholder={placeholder} ref={ref} value={activeView === "search" ? searchQuery : prompt} onChange={handleChange} autoCapitalize={autoCapitalize} autoComplete={autoComplete} autoCorrect={autoCorrect} autoFocus={autoFocus} spellCheck={spellCheck} />
+    </>;
 });
+exports.Prompt = Prompt;
 Prompt.displayName = "Markprompt.Prompt";
 /**
  * Render the markdown answer from the Markprompt API.
  */
 function Answer(props) {
-    const { remarkPlugins = [remarkGfm], ...rest } = props;
-    const { answer } = useMarkpromptContext();
-    return (React.createElement(Markdown, { ...rest, remarkPlugins: remarkPlugins }, answer !== undefined && answer != null ? answer : ""));
+  var _props$remarkPlugins = props.remarkPlugins,
+    remarkPlugins = _props$remarkPlugins === void 0 ? [_remarkGfm["default"]] : _props$remarkPlugins,
+    rest = _objectWithoutProperties(props, _excluded8);
+  var _useMarkpromptContext7 = (0, _context2.useMarkpromptContext)(),
+    answer = _useMarkpromptContext7.answer;
+  return <_reactMarkdown.default {...rest} remarkPlugins={remarkPlugins}>
+      {answer !== undefined && answer != null ? answer : ""}
+    </_reactMarkdown.default>;
 }
 Answer.displayName = "Markprompt.Answer";
 /**
  * A component automatically that scrolls to the bottom.
  */
-const AutoScroller = forwardRef((props, ref) => {
-    const { autoScroll = true, scrollBehavior = "smooth" } = props;
-    const localRef = useRef(null);
-    const { answer, state } = useMarkpromptContext();
-    useEffect(() => {
-        if (!localRef.current)
-            return;
-        if (!autoScroll)
-            return;
-        localRef.current.scrollTo({
-            top: localRef.current.scrollHeight,
-            behavior: scrollBehavior,
-        });
-    }, [answer, state, autoScroll, scrollBehavior]);
-    return React.createElement("div", { ref: mergeRefs([ref, localRef]), ...props });
+var AutoScroller = (0, _react.forwardRef)(function (props, ref) {
+  var _props$autoScroll = props.autoScroll,
+    autoScroll = _props$autoScroll === void 0 ? true : _props$autoScroll,
+    _props$scrollBehavior = props.scrollBehavior,
+    scrollBehavior = _props$scrollBehavior === void 0 ? "smooth" : _props$scrollBehavior;
+  var localRef = (0, _react.useRef)(null);
+  var _useMarkpromptContext8 = (0, _context2.useMarkpromptContext)(),
+    answer = _useMarkpromptContext8.answer,
+    state = _useMarkpromptContext8.state;
+  (0, _react.useEffect)(function () {
+    if (!localRef.current) return;
+    if (!autoScroll) return;
+    localRef.current.scrollTo({
+      top: localRef.current.scrollHeight,
+      behavior: scrollBehavior
+    });
+  }, [answer, state, autoScroll, scrollBehavior]);
+  return <div ref={(0, _reactMergeRefs.mergeRefs)([ref, localRef])} {...props} />;
 });
+exports.AutoScroller = AutoScroller;
 AutoScroller.displayName = "Markprompt.AutoScroller";
 /**
  * Render the references that Markprompt returns.
  */
-const References = function References(props, ref) {
-    const { RootComponent = "ul", ReferenceComponent = "li" } = props;
-    const { references } = useMarkpromptContext();
-    return (React.createElement(RootComponent, { ref: ref }, references.map((reference, index) => {
-        return (React.createElement(ReferenceComponent, { key: `${reference.file.path}-${index}`, reference: reference, index: index }));
-    })));
+var References = function References(props, ref) {
+  var _props$RootComponent = props.RootComponent,
+    RootComponent = _props$RootComponent === void 0 ? "ul" : _props$RootComponent,
+    _props$ReferenceCompo = props.ReferenceComponent,
+    ReferenceComponent = _props$ReferenceCompo === void 0 ? "li" : _props$ReferenceCompo;
+  var _useMarkpromptContext9 = (0, _context2.useMarkpromptContext)(),
+    references = _useMarkpromptContext9.references;
+  return <RootComponent ref={ref}>
+      {references.map(function (reference, index) {
+      return <ReferenceComponent key={"".concat(reference.file.path, "-").concat(index)} reference={reference} index={index} />;
+    })}
+    </RootComponent>;
 };
 /**
  * Render the references that Markprompr returned.
  */
-const ForwardedReferences = forwardRef(References);
+var ForwardedReferences = (0, _react.forwardRef)(References);
+exports.References = ForwardedReferences;
 ForwardedReferences.displayName = "Markprompt.References";
-const SearchResults = forwardRef((props, ref) => {
-    const { as: Component = "ul", label = "Search results", SearchResultComponent = SearchResult, ...rest } = props;
-    const { searchResults } = useMarkpromptContext();
-    return (React.createElement(Component, { ...rest, ref: ref, role: "listbox", id: "markprompt-search-results", tabIndex: 0, "aria-label": label }, searchResults.map((result, index) => {
-        const id = `markprompt-result-${index}`;
-        return (React.createElement(SearchResultComponent, { role: "option", index: index, id: id, key: `${result.href}:${result.title}`, ...result }));
-    })));
+var SearchResults = (0, _react.forwardRef)(function (props, ref) {
+  var _props$as = props.as,
+    Component = _props$as === void 0 ? "ul" : _props$as,
+    _props$label = props.label,
+    label = _props$label === void 0 ? "Search results" : _props$label,
+    _props$SearchResultCo = props.SearchResultComponent,
+    SearchResultComponent = _props$SearchResultCo === void 0 ? SearchResult : _props$SearchResultCo,
+    rest = _objectWithoutProperties(props, _excluded9);
+  var _useMarkpromptContext10 = (0, _context2.useMarkpromptContext)(),
+    searchResults = _useMarkpromptContext10.searchResults;
+  return <Component {...rest} ref={ref} role="listbox" id="markprompt-search-results" tabIndex={0} aria-label={label}>
+        {searchResults.map(function (result, index) {
+      var id = "markprompt-result-".concat(index);
+      return <SearchResultComponent role="option" index={index} id={id} key={"".concat(result.href, ":").concat(result.title)} {...result} />;
+    })}
+      </Component>;
 });
+exports.SearchResults = SearchResults;
 SearchResults.displayName = "Markprompt.SearchResults";
-const SearchResult = forwardRef((props, ref) => {
-    const { title, href, ...rest } = props;
-    return (React.createElement("li", { ref: ref, ...rest },
-        React.createElement("a", { href: href }, title)));
+var SearchResult = (0, _react.forwardRef)(function (props, ref) {
+  var title = props.title,
+    href = props.href,
+    rest = _objectWithoutProperties(props, _excluded10);
+  return <li ref={ref} {...rest}>
+        <a href={href}>{title}</a>
+      </li>;
 });
+exports.SearchResult = SearchResult;
 SearchResult.displayName = "Markprompt.SearchResult";
-export { Answer, AutoScroller, Close, Content, Description, DialogTrigger, Form, Overlay, PlainContent, Portal, Prompt, ForwardedReferences as References, Root, SearchResult, SearchResults, Title, };
-//# sourceMappingURL=headless.js.map

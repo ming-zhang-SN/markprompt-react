@@ -1,10 +1,18 @@
-import React, {} from 'react';
-import { useMarkpromptContext } from './index.js';
-export const Caret = () => {
-    const { answer } = useMarkpromptContext();
-    if (answer) {
-        return null;
-    }
-    return React.createElement("span", { className: "MarkpromptCaret" });
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Caret = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _index = require("./index.js");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var Caret = function Caret() {
+  var _useMarkpromptContext = (0, _index.useMarkpromptContext)(),
+    answer = _useMarkpromptContext.answer;
+  if (answer) {
+    return null;
+  }
+  return <span className="MarkpromptCaret" />;
 };
-//# sourceMappingURL=Caret.js.map
+exports.Caret = Caret;
